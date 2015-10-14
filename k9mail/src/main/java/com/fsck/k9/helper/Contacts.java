@@ -415,7 +415,7 @@ public class Contacts {
     private Intent getOwnContactIntent(){
 //        Intent intent = new Intent();
         Intent intent = new Intent(mContext, ExpandList.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 //        intent.setComponent(new ComponentName("com.example.administrator.emailcontact","com.example.administrator.emailcontact.activity.ContactList"));
         return intent;
     }
