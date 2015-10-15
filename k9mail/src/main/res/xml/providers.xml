@@ -78,6 +78,37 @@
 
 <providers>
 
+    <!-- 126mail variants -->
+    <provider id="126mail" label="126mail" domain="126.com">
+        <incoming uri="pop3+ssl+://pop.126.com" username="$email" />
+        <outgoing uri="smtp+ssl+://smtp.126.com" username="$email" />
+    </provider>
+    <!-- sinamail variants -->
+    <provider id="sinamail" label="Sinamail" domain="sina.com">
+        <incoming uri="pop3+ssl+://pop.sina.com" username="$email" />
+        <outgoing uri="smtp+ssl+://smtp.sina.com" username="$email" />
+    </provider>
+    <!-- 139mail variants -->
+    <provider id="139mail" label="139mail" domain="139.com">
+        <incoming uri="pop3+ssl+://pop.139.com" username="$email" />
+        <outgoing uri="smtp+ssl+://smtp.139.com" username="$email" />
+    </provider>
+    <!-- sohumail variants -->
+    <provider id="sohumail" label="sohumail" domain="sohu.com">
+        <incoming uri="pop3+ssl+://pop3.sohu.com" username="$email" />
+        <outgoing uri="smtp+ssl+://smtp.sohu.com" username="$email" />
+    </provider>
+    <!-- 163mail variants -->
+    <provider id="163mail" label="163mail" domain="163.com">
+        <incoming uri="pop3+ssl+://pop.163.com" username="$email" />
+        <outgoing uri="smtp+ssl+://smtp.163.com" username="$email" />
+    </provider>
+    <!-- QQmail variants -->
+    <provider id="qqmail" label="QQmail" domain="qq.com">
+        <incoming uri="pop3+ssl+://pop.qq.com" username="$email" />
+        <outgoing uri="smtp+ssl+://smtp.qq.com" username="$email" />
+    </provider>
+
     <!-- Gmail variants -->
     <provider id="gmail" label="Gmail" domain="gmail.com">
         <incoming uri="imap+ssl+://imap.gmail.com" username="$email" />
