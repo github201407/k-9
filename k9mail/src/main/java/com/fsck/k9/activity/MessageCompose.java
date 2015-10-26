@@ -70,11 +70,13 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.fsck.k9.Account;
 import com.fsck.k9.Account.MessageFormat;
 import com.fsck.k9.Account.QuoteStyle;
@@ -1554,7 +1556,7 @@ public class MessageCompose extends K9Activity implements OnClickListener,
         View view = getLayoutInflater().inflate(R.layout.message_compose_attachment, mAttachments, false);
         TextView nameView = (TextView) view.findViewById(R.id.attachment_name);
         View progressBar = view.findViewById(R.id.progressBar);
-
+        refreshThumbnail(view, attachment);
         if (hasMetadata) {
             nameView.setText(attachment.name);
         } else {
@@ -3637,6 +3639,15 @@ public class MessageCompose extends K9Activity implements OnClickListener,
             public void onClick(DialogInterface dialog, int which) {
             }
         }).create();
+    }
+
+    public void refreshThumbnail(View view, Attachment attachment) {
+        ImageView thumbnailView = (ImageView) view.findViewById(R.id.attachment_icon);
+        Glide.with(MessageCompose.this)
+                .load(attachment.uri)
+                .placeholder(R.drawable.attached_image_placeholder)
+                .centerCrop()
+                .into(thumbnailView);
     }
 
 }
