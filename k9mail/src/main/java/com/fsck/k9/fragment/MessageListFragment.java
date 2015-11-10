@@ -1967,6 +1967,18 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
             if (holder.contactBadge != null) {
                 if (counterpartyAddress != null) {
                     holder.contactBadge.assignContactFromEmail(counterpartyAddress.getAddress(), true);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("email", counterpartyAddress.getAddress());
+                    bundle.putString("name", displayName.toString());
+                    holder.contactBadge.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+//                            String email = (String) v.getTag();
+//                            Toast.makeText(v.getContext(), email, Toast.LENGTH_SHORT).show();
+                            Context context = v.getContext();
+                            context.set
+                        }
+                    });
                     /*
                      * At least in Android 2.2 a different background + padding is used when no
                      * email address is available. ListView reuses the views but QuickContactBadge
