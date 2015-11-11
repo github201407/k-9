@@ -1967,7 +1967,7 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
             if (holder.contactBadge != null) {
                 if (counterpartyAddress != null) {
                     holder.contactBadge.assignContactFromEmail(counterpartyAddress.getAddress(), true);
-                    Bundle bundle = new Bundle();
+                    final Bundle bundle = new Bundle();
                     bundle.putString("email", counterpartyAddress.getAddress());
                     bundle.putString("name", displayName.toString());
                     holder.contactBadge.setOnClickListener(new View.OnClickListener() {
@@ -1976,7 +1976,8 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
 //                            String email = (String) v.getTag();
 //                            Toast.makeText(v.getContext(), email, Toast.LENGTH_SHORT).show();
                             Context context = v.getContext();
-                            context.set
+//                            ModifyContact.Instance(context, 0, ModifyContact.K9_SHOW, bundle);
+//                            ModifyContact.Instance(context, 0, 6, bundle);
                         }
                     });
                     /*
