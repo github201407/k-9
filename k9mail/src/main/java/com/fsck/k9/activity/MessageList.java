@@ -227,7 +227,7 @@ public class MessageList extends K9Activity implements MessageListFragmentListen
 
         ChangeLog cl = new ChangeLog(this);
         if (cl.isFirstRun()) {
-            cl.getLogDialog().show();
+//            cl.getLogDialog().show();
         }
     }
 

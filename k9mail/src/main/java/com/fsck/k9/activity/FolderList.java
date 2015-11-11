@@ -290,7 +290,7 @@ public class FolderList extends K9ListActivity {
 
         ChangeLog cl = new ChangeLog(this);
         if (cl.isFirstRun()) {
-            cl.getLogDialog().show();
+//            cl.getLogDialog().show();
         }
     }
 
