@@ -84,7 +84,7 @@ public class MessageTopView extends LinearLayout implements ShowPicturesControll
     public void setMessage(Account account, MessageViewInfo messageViewInfo)
             throws MessagingException {
         resetView();
-
+        boolean isImap = account.getStoreUri().startsWith("imap");
         ShowPictures showPicturesSetting = account.getShowPictures();
         boolean automaticallyLoadPictures =
                 shouldAutomaticallyLoadPictures(showPicturesSetting, messageViewInfo.message);
@@ -93,7 +93,7 @@ public class MessageTopView extends LinearLayout implements ShowPicturesControll
             MessageContainerView view = (MessageContainerView) mInflater.inflate(R.layout.message_container, null);
             boolean displayPgpHeader = account.isOpenPgpProviderConfigured();
             view.displayMessageViewContainer(container, automaticallyLoadPictures, this, attachmentCallback,
-                    openPgpHeaderViewCallback, displayPgpHeader, isShowAttachmentView);
+                    openPgpHeaderViewCallback, displayPgpHeader, isImap || isShowAttachmentView);
 
             containerViews.addView(view);
         }
