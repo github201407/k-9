@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/modify_contact">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp">
+
+
+        <TextView
+            android:id="@+id/id_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/id"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_marginRight="@dimen/modify_margin"
+            android:text="@string/id"
+            android:textColor="#000"
+            android:textSize="@dimen/modify_label_text_size" />
+
+        <EditText
+            android:id="@+id/id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_toRightOf="@+id/id_label"
+            android:textColor="#555"
+            android:background="@drawable/edit_bg" />
+
+        <TextView
+            android:id="@+id/displayName_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/displayName"
+            android:layout_alignBottom="@+id/displayName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:text="@string/displayName"
+            android:textColor="#000"
+            android:textSize="@dimen/modify_label_text_size" />
+
+        <EditText
+            android:id="@+id/displayName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/id"
+            android:layout_alignStart="@+id/id"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_below="@+id/id"
+            android:textColor="#555"
+            android:layout_marginTop="@dimen/modify_margin"
+            android:background="@drawable/edit_bg"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/email_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/email"
+            android:layout_alignBottom="@+id/email"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:text="@string/email"
+            android:textColor="#000"
+            android:textSize="@dimen/modify_label_text_size" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_below="@+id/displayName"
+            android:layout_marginTop="@dimen/modify_margin"
+            android:layout_toEndOf="@+id/id_label"
+            android:textColor="#555"
+            android:layout_toRightOf="@+id/id_label"
+            android:background="@drawable/edit_bg"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/number_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/number"
+            android:layout_alignBottom="@+id/number"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:text="@string/number"
+            android:textColor="#000"
+            android:textSize="@dimen/modify_label_text_size" />
+
+        <EditText
+            android:id="@+id/number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_below="@+id/email"
+            android:layout_marginTop="@dimen/modify_margin"
+            android:layout_toEndOf="@+id/id_label"
+            android:layout_toRightOf="@+id/id_label"
+            android:background="@drawable/edit_bg"
+            android:inputType="phone" />
+
+        <TextView
+            android:id="@+id/type_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/type_container"
+            android:layout_alignBottom="@+id/type_container"
+            android:layout_alignRight="@+id/id_label"
+            android:layout_alignTop="@+id/type_container"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_below="@+id/type_container"
+            android:gravity="center"
+            android:textColor="#000"
+            android:text="@string/type"
+            android:textSize="@dimen/modify_label_text_size" />
+
+        <LinearLayout
+            android:id="@+id/type_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/id"
+            android:layout_below="@+id/number"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/type_label"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/add_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="@string/add_group"
+                android:textColor="@color/button_text_color" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/type_container"
+            android:layout_marginTop="10dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/delete_button_selector"
+            android:text="@string/delete"/>
+    </RelativeLayout>
+</merge>

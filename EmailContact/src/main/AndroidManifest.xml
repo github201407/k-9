@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.administrator.emailcontact">
+
+    <!-- <uses-permission android:name="android.permission.WRITE_CONTACTS" />-->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true">
+
+        <provider
+            android:name=".provider.ContactProvider"
+            android:authorities="${applicationId}.ContactProvider"
+            android:label="@string/app_name_contact"
+            android:multiprocess="true" />
+        <provider
+            android:name=".provider.GroupProvider"
+            android:authorities="${applicationId}.GroupProvider"
+            android:label="@string/app_name_contact"
+            android:multiprocess="true" />
+
+        <activity
+            android:name=".activity.ExpandList"
+            android:label="@string/contact"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:logo="@android:color/transparent">
+        </activity>
+        <activity
+            android:name=".activity.ModifyContact"
+            android:label="@string/contact"
+            android:logo="@android:color/transparent"/>
+        <activity
+            android:name=".activity.AddGroup"
+            android:label="@string/add_group"
+            android:logo="@android:color/transparent"/>
+    </application>
+
+</manifest>

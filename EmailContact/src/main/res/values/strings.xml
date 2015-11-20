@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name_contact">EmailContact</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_download">DownLoad</string>
+
+    <string name="number">号码</string>
+    <string name="email">邮箱</string>
+    <string name="type">群组</string>
+    <string name="displayName">姓名</string>
+    <string name="id">编号</string>
+
+    <string name="contact">联系人</string>
+    <string name="all">全选</string>
+    <string name="cancelAll">反选</string>
+    <string name="quit">退出</string>
+    <string name="ok">确定</string>
+    <string name="expand_title">ExpandableListView</string>
+    <string name="update">更新列表</string>
+    <string name="modify">编辑</string>
+    <string name="delete">删除</string>
+    <string name="no_data">No data</string>
+    <string name="search">搜索</string>
+    <string name="back">返回</string>
+    <string name="edt_hint">请输入关键词（至少两个字）</string>
+    <string name="none_contact">没有找到联系人</string>
+    <string name="icon">icon</string>
+    <string name="show_contact">查看联系人</string>
+    <string name="modify_contact">编辑联系人</string>
+    <string name="add_contact">添加联系人</string>
+    <string name="modify_success">成功</string>
+    <string name="modify_fail">失败</string>
+    <string name="add">添加</string>
+    <string name="add_group">添加分组</string>
+    <string name="group_name">群组名</string>
+    <string name="group_parent">上级组别</string>
+    <string name="group_top">默认：第一级</string>
+    <string name="hint_input_group_name">请填写群组名！</string>
+    <string name="group_null">未分组</string>
+    <string name="email_error">邮箱有误，请重新输入！</string>
+    <string name="phone_error">手机号码有误，请重新输入！</string>
+
+    <string-array name="array_groups">
+        <item>dev1</item>
+        <item>dev2</item>
+        <item>dev3</item>
+    </string-array>
+
+</resources>

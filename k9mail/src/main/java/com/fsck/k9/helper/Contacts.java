@@ -1,19 +1,15 @@
 package com.fsck.k9.helper;
 
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.content.Intent;
 import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.administrator.emailcontact.activity.ExpandList;
 import com.fsck.k9.K9;
 import com.fsck.k9.mail.Address;
 
@@ -414,9 +410,9 @@ public class Contacts {
     }
 
     private Intent getOwnContactIntent(){
-        Intent intent = new Intent();
+        Intent intent = new Intent(mContext, ExpandList.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-        intent.setComponent(new ComponentName("com.example.administrator.emailcontact","com.example.administrator.emailcontact.activity.ContactList"));
+        //intent.setComponent(new ComponentName("com.example.administrator.emailcontact","com.example.administrator.emailcontact.activity.ContactList"));
         return intent;
     }
 

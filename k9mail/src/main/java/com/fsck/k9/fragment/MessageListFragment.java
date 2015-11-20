@@ -1,19 +1,5 @@
 package com.fsck.k9.fragment;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.Future;
-
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -65,6 +51,7 @@ import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.emailcontact.activity.ModifyContact;
 import com.fsck.k9.Account;
 import com.fsck.k9.Account.SortType;
 import com.fsck.k9.FontSizes;
@@ -101,10 +88,23 @@ import com.fsck.k9.search.SearchSpecification;
 import com.fsck.k9.search.SearchSpecification.SearchCondition;
 import com.fsck.k9.search.SearchSpecification.SearchField;
 import com.fsck.k9.search.SqlQueryBuilder;
-
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.concurrent.Future;
 
 
 public class MessageListFragment extends Fragment implements OnItemClickListener,
@@ -1976,7 +1976,7 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
 //                            String email = (String) v.getTag();
 //                            Toast.makeText(v.getContext(), email, Toast.LENGTH_SHORT).show();
                             Context context = v.getContext();
-//                            ModifyContact.Instance(context, 0, ModifyContact.K9_SHOW, bundle);
+                            ModifyContact.Instance(context, 0, ModifyContact.K9_SHOW, bundle);
 //                            ModifyContact.Instance(context, 0, 6, bundle);
                         }
                     });
