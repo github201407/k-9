@@ -1,10 +1,5 @@
 package com.fsck.k9.view;
 
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Parcel;
@@ -38,6 +33,11 @@ import com.fsck.k9.mail.Flag;
 import com.fsck.k9.mail.Message;
 import com.fsck.k9.mail.MessagingException;
 import com.fsck.k9.mail.internet.MimeUtility;
+
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 public class MessageHeader extends LinearLayout implements OnClickListener {
     private Context mContext;
@@ -130,7 +130,7 @@ public class MessageHeader extends LinearLayout implements OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.from: {
-                onAddSenderToContacts();
+//                onAddSenderToContacts();
                 break;
             }
             case R.id.to:
@@ -181,23 +181,12 @@ public class MessageHeader extends LinearLayout implements OnClickListener {
         Integer messageToShow = null;
         try {
             // Retrieve additional headers
-            boolean allHeadersDownloaded = mMessage.isSet(Flag.X_GOT_ALL_HEADERS);
             List<HeaderEntry> additionalHeaders = getAdditionalHeaders(mMessage);
             if (!additionalHeaders.isEmpty()) {
                 // Show the additional headers that we have got.
                 populateAdditionalHeadersView(additionalHeaders);
                 mAdditionalHeadersView.setVisibility(View.VISIBLE);
-            }
-            if (!allHeadersDownloaded) {
-                /*
-                * Tell the user about the "save all headers" setting
-                *
-                * NOTE: This is only a temporary solution... in fact,
-                * the system should download headers on-demand when they
-                * have not been saved in their entirety initially.
-                */
-                messageToShow = R.string.message_additional_headers_not_downloaded;
-            } else if (additionalHeaders.isEmpty()) {
+            } else {
                 // All headers have been downloaded, but there are no additional headers.
                 messageToShow = R.string.message_no_additional_headers_available;
             }

@@ -1,15 +1,15 @@
 package com.fsck.k9.search;
 
-import java.util.List;
-
 import com.fsck.k9.Account;
-import com.fsck.k9.mail.MessagingException;
 import com.fsck.k9.mail.Folder;
+import com.fsck.k9.mail.MessagingException;
 import com.fsck.k9.mailstore.LocalFolder;
 import com.fsck.k9.mailstore.LocalStore;
 import com.fsck.k9.search.SearchSpecification.Attribute;
 import com.fsck.k9.search.SearchSpecification.SearchCondition;
 import com.fsck.k9.search.SearchSpecification.SearchField;
+
+import java.util.List;
 
 
 public class SqlQueryBuilder {
@@ -140,7 +140,7 @@ public class SqlQueryBuilder {
                 break;
             }
             case MESSAGE_CONTENTS: {
-                throw new RuntimeException("Searching in message bodies is currently not supported");
+//                throw new RuntimeException("Searching in message bodies is currently not supported");
             }
             case REPLY_TO: {
                 columnName = "reply_to_list";

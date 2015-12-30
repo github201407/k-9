@@ -90,6 +90,7 @@ class StoreSchemaDefinition implements LockableDatabase.SchemaDefinition {
                         "attachment_count INTEGER, " +
                         "internal_date INTEGER, " +
                         "message_id TEXT, " +
+                        "preview_type TEXT default \"none\", " +
                         "preview TEXT, " +
                         "mime_type TEXT, "+
                         "normalized_subject_hash INTEGER, " +
@@ -433,7 +434,6 @@ class StoreSchemaDefinition implements LockableDatabase.SchemaDefinition {
                                             case X_DESTROYED:
                                             case X_DOWNLOADED_FULL:
                                             case X_DOWNLOADED_PARTIAL:
-                                            case X_GOT_ALL_HEADERS:
                                             case X_REMOTE_COPY_STARTED:
                                             case X_SEND_FAILED:
                                             case X_SEND_IN_PROGRESS: {
@@ -575,6 +575,9 @@ class StoreSchemaDefinition implements LockableDatabase.SchemaDefinition {
                 if (db.getVersion() < 53) {
                     removeNullValuesFromEmptyColumnInMessagesTable(db);
                 }
+                if (db.getVersion() < 54) {
+                    addPreviewTypeColumn(db);
+                }
             }
 
             db.setVersion(LocalStore.DB_VERSION);
@@ -636,5 +639,10 @@ class StoreSchemaDefinition implements LockableDatabase.SchemaDefinition {
 
     private void removeNullValuesFromEmptyColumnInMessagesTable(SQLiteDatabase db) {
         db.execSQL("UPDATE messages SET empty = 0 WHERE empty IS NULL");
+    }
+
+    private void addPreviewTypeColumn(SQLiteDatabase db) {
+        db.execSQL("ALTER TABLE messages ADD preview_type TEXT default \"none\"");
+        db.execSQL("UPDATE messages SET preview_type = 'text' WHERE preview IS NOT NULL");
     }
 }

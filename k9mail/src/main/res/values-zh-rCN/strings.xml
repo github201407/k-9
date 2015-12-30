@@ -907,4 +907,12 @@ K-9改进的功能包括：
   <string name="client_certificate_retrieval_failure">无法获取别名 \"<xliff:g id="alias">%s</xliff:g>\" 的客户端证书</string>
   <string name="client_certificate_advanced_options">高级选项</string>
   <string name="client_certificate_expired">客户端证书 \"<xliff:g id="certificate_alias">%1$s</xliff:g>\" 已经过期，或者尚未开始生效。 (<xliff:g id="exception_message">%2$s</xliff:g>)</string>
+
+  <!--==== add attachment dialog menu_items ====-->
+  <string name="pick_photo">文件管理器</string>
+  <string name="take_photo">拍照</string>
+  <string name="attachment_icon">attachment_icon</string>
+  <string name="attachment_not_download">下载附件</string>
+  <string name="attachment_loading">正在下载…</string>
+  <string name="message_view_date_label">日期：</string>
 </resources>
