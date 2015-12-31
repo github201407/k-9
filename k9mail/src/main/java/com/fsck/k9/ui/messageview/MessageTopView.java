@@ -1,8 +1,5 @@
 package com.fsck.k9.ui.messageview;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
@@ -24,6 +21,9 @@ import com.fsck.k9.mail.MessagingException;
 import com.fsck.k9.mailstore.MessageViewInfo;
 import com.fsck.k9.mailstore.MessageViewInfo.MessageViewContainer;
 import com.fsck.k9.view.MessageHeader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MessageTopView extends LinearLayout implements ShowPicturesController {

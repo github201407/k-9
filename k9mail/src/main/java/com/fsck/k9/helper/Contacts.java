@@ -195,7 +195,7 @@ public class Contacts {
      * @return The intent necessary to open a contact picker.
      */
     public Intent contactPickerIntent() {
-        return new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
+        return getOwnContactIntent();//new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
     }
 
     /**
@@ -271,8 +271,7 @@ public class Contacts {
 
     private Intent getOwnContactIntent(){
         Intent intent = new Intent();
-        intent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-        intent.setComponent(new ComponentName("com.example.administrator.emailcontact","com.example.administrator.emailcontact.activity.ContactList"));
+        intent.setComponent(new ComponentName("com.example.administrator.emailcontact","com.example.administrator.emailcontact.activity.ExpandList"));
         return intent;
     }
 

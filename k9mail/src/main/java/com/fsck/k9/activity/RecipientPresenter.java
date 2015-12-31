@@ -1,11 +1,6 @@
 package com.fsck.k9.activity;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -28,6 +23,11 @@ import com.fsck.k9.mail.MessagingException;
 import com.fsck.k9.mailstore.LocalMessage;
 import com.fsck.k9.view.RecipientSelectView.Recipient;
 import com.fsck.k9.view.RecipientSelectView.RecipientCryptoStatus;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 
 public class RecipientPresenter {
@@ -465,9 +465,9 @@ public class RecipientPresenter {
         if (requestCode != CONTACT_PICKER_TO && requestCode != CONTACT_PICKER_CC && requestCode != CONTACT_PICKER_BCC) {
             return;
         }
-
         RecipientType recipientType = recipientTypeFromRequestCode(requestCode);
-        addRecipientFromContactUri(recipientType, data.getData());
+//        addRecipientFromContactUri(recipientType, data.getData());
+        addRecipientFromEmailContact(recipientType, data);
     }
 
     private static int recipientTypeToRequestCode(RecipientType type) {
@@ -529,7 +529,7 @@ public class RecipientPresenter {
             hasContactPicker = !resolveInfoList.isEmpty();
         }
 
-        return hasContactPicker;
+        return true;//hasContactPicker;
     }
 
 
@@ -537,5 +537,14 @@ public class RecipientPresenter {
         OPPORTUNISTIC,
         DISABLE,
         SIGN_ONLY
+    }
+
+    private void addRecipientFromEmailContact(RecipientType recipientType, Intent data) {
+        String emails = data.getStringExtra("email");
+        Address[] adds = Address.parse(emails);
+        addRecipientsFromAddresses(recipientType, adds);
+
+//        Recipient recipient = result.get(0);
+//        recipientMvpView.addRecipients(recipientType, recipient);
     }
 }
