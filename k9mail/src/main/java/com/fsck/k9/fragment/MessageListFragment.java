@@ -1,19 +1,5 @@
 package com.fsck.k9.fragment;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.Future;
-
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -88,6 +74,7 @@ import com.fsck.k9.mail.Flag;
 import com.fsck.k9.mail.Folder;
 import com.fsck.k9.mail.Message;
 import com.fsck.k9.mail.MessagingException;
+import com.fsck.k9.mailstore.DatabasePreviewType;
 import com.fsck.k9.mailstore.LocalFolder;
 import com.fsck.k9.mailstore.LocalMessage;
 import com.fsck.k9.mailstore.LocalStore;
@@ -101,10 +88,23 @@ import com.fsck.k9.search.SearchSpecification;
 import com.fsck.k9.search.SearchSpecification.SearchCondition;
 import com.fsck.k9.search.SearchSpecification.SearchField;
 import com.fsck.k9.search.SqlQueryBuilder;
-
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.concurrent.Future;
 
 
 public class MessageListFragment extends Fragment implements OnItemClickListener,
@@ -125,6 +125,7 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
         MessageColumns.FORWARDED,
         MessageColumns.ATTACHMENT_COUNT,
         MessageColumns.FOLDER_ID,
+        MessageColumns.PREVIEW_TYPE,
         MessageColumns.PREVIEW,
         ThreadColumns.ROOT,
         SpecialColumns.ACCOUNT_UUID,
@@ -147,11 +148,12 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
     private static final int FORWARDED_COLUMN = 11;
     private static final int ATTACHMENT_COUNT_COLUMN = 12;
     private static final int FOLDER_ID_COLUMN = 13;
-    private static final int PREVIEW_COLUMN = 14;
-    private static final int THREAD_ROOT_COLUMN = 15;
-    private static final int ACCOUNT_UUID_COLUMN = 16;
-    private static final int FOLDER_NAME_COLUMN = 17;
-    private static final int THREAD_COUNT_COLUMN = 18;
+    private static final int PREVIEW_TYPE_COLUMN = 14;
+    private static final int PREVIEW_COLUMN = 15;
+    private static final int THREAD_ROOT_COLUMN = 16;
+    private static final int ACCOUNT_UUID_COLUMN = 17;
+    private static final int FOLDER_NAME_COLUMN = 18;
+    private static final int THREAD_COUNT_COLUMN = 19;
 
     private static final String[] PROJECTION = Arrays.copyOf(THREADED_PROJECTION,
             THREAD_COUNT_COLUMN);
@@ -2042,10 +2044,8 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
                     .append(beforePreviewText);
 
             if (mPreviewLines > 0) {
-                String preview = cursor.getString(PREVIEW_COLUMN);
-                if (preview != null) {
-                    messageStringBuilder.append(" ").append(preview);
-                }
+                String preview = getPreview(cursor);
+                messageStringBuilder.append(" ").append(preview);
             }
 
             holder.preview.setText(messageStringBuilder, TextView.BufferType.SPANNABLE);
@@ -2108,6 +2108,25 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
             }
 
             holder.date.setText(displayDate);
+        }
+
+        private String getPreview(Cursor cursor) {
+            String previewTypeString = cursor.getString(PREVIEW_TYPE_COLUMN);
+            DatabasePreviewType previewType = DatabasePreviewType.fromDatabaseValue(previewTypeString);
+
+            switch (previewType) {
+                case NONE: {
+                    return "";
+                }
+                case ENCRYPTED: {
+                    return getString(R.string.preview_encrypted);
+                }
+                case TEXT: {
+                    return cursor.getString(PREVIEW_COLUMN);
+                }
+            }
+
+            throw new AssertionError("Unknown preview type: " + previewType);
         }
     }
 
