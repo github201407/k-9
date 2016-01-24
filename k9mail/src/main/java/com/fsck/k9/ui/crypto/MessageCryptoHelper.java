@@ -36,6 +36,7 @@ import com.fsck.k9.mailstore.MessageHelper;
 import com.fsck.k9.mailstore.OpenPgpResultAnnotation;
 import com.fsck.k9.mailstore.OpenPgpResultAnnotation.CryptoError;
 import org.openintents.openpgp.IOpenPgpService;
+import org.openintents.openpgp.IOpenPgpService2;
 import org.openintents.openpgp.OpenPgpDecryptionResult;
 import org.openintents.openpgp.OpenPgpError;
 import org.openintents.openpgp.OpenPgpSignatureResult;
@@ -63,6 +64,7 @@ public class MessageCryptoHelper {
     private Intent currentCryptoResult;
 
     private MessageCryptoAnnotations messageAnnotations;
+    private Intent userInteractionResultIntent;
 
 
     public MessageCryptoHelper(Activity activity, Account account, MessageCryptoCallback callback) {
@@ -148,7 +150,7 @@ public class MessageCryptoHelper {
         new OpenPgpServiceConnection(context, openPgpProvider,
                 new OnBound() {
                     @Override
-                    public void onBound(IOpenPgpService service) {
+                    public void onBound(IOpenPgpService2 service) {
                         openPgpApi = new OpenPgpApi(context, service);
 
                         decryptOrVerifyNextPart();
@@ -163,7 +165,12 @@ public class MessageCryptoHelper {
 
     private void decryptOrVerifyPart(CryptoPart cryptoPart) {
         currentCryptoPart = cryptoPart;
-        decryptVerify(new Intent());
+        Intent decryptIntent = userInteractionResultIntent;
+        userInteractionResultIntent = null;
+        if (decryptIntent == null) {
+            decryptIntent = new Intent();
+        }
+        decryptVerify(decryptIntent);
     }
 
     private void decryptVerify(Intent intent) {
@@ -419,6 +426,7 @@ public class MessageCryptoHelper {
         }
 
         if (resultCode == Activity.RESULT_OK) {
+            userInteractionResultIntent = data;
             decryptOrVerifyNextPart();
         } else {
             onCryptoFailed(new OpenPgpError(OpenPgpError.CLIENT_SIDE_ERROR, context.getString(R.string.openpgp_canceled_by_user)));
