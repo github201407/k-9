@@ -92,6 +92,16 @@
         <incoming uri="pop3+ssl+://pop.139.com" username="$email"/>
         <outgoing uri="smtp+ssl+://smtp.139.com" username="$email"/>
     </provider>
+    <!--189mail variants-->
+    <provider id="189mail" label="189mail" domain="189.cn">
+        <incoming uri="pop3+ssl+://pop.189.cn" username="$email"/>
+        <outgoing uri="smtp+ssl+://smtp.189.cn" username="$email"/>
+    </provider>
+    <!--womail variants-->
+    <provider id="womail" label="womail" domain="wo.cn">
+        <incoming uri="pop3+ssl+://pop.wo.cn" username="$email"/>
+        <outgoing uri="smtp+ssl+://smtp.wo.cn" username="$email"/>
+    </provider>
     <!--sohumail variants-->
     <provider id="sohumail" label="sohumail" domain="sohu.com">
         <incoming uri="pop3+ssl+://pop3.sohu.com" username="$email"/>
@@ -106,6 +116,12 @@
     <provider id="qqmail" label="QQmail" domain="qq.com">
         <incoming uri="pop3+ssl+://pop.qq.com" username="$email"/>
         <outgoing uri="smtp+ssl+://smtp.qq.com" username="$email"/>
+    </provider>
+
+    <!--189mail variants-->
+    <provider id="189mailimap" label="189mailimap" domain="189.cn">
+        <incoming uri="imap+ssl+://imap.189.cn" username="$email"/>
+        <outgoing uri="smtp+ssl+://smtp.189.cn" username="$email"/>
     </provider>
 
     <!-- Gmail variants -->
