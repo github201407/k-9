@@ -1,8 +1,5 @@
 package com.fsck.k9.ui.messageview;
 
-import java.util.Collections;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.DownloadManager;
@@ -47,12 +44,15 @@ import com.fsck.k9.mail.MessagingException;
 import com.fsck.k9.mailstore.AttachmentViewInfo;
 import com.fsck.k9.mailstore.LocalMessage;
 import com.fsck.k9.mailstore.MessageViewInfo;
+import com.fsck.k9.ui.crypto.MessageCryptoAnnotations;
 import com.fsck.k9.ui.crypto.MessageCryptoCallback;
 import com.fsck.k9.ui.crypto.MessageCryptoHelper;
 import com.fsck.k9.ui.message.DecodeMessageLoader;
 import com.fsck.k9.ui.message.LocalMessageLoader;
-import com.fsck.k9.ui.crypto.MessageCryptoAnnotations;
 import com.fsck.k9.view.MessageHeader;
+
+import java.util.Collections;
+import java.util.Locale;
 
 public class MessageViewFragment extends Fragment implements ConfirmationDialogFragmentListener,
         AttachmentViewCallback, OpenPgpHeaderViewCallback, MessageCryptoCallback {

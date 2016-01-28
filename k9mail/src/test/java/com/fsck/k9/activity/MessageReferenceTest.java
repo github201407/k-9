@@ -3,6 +3,7 @@ package com.fsck.k9.activity;
 
 import com.fsck.k9.mail.Flag;
 import com.fsck.k9.mail.MessagingException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -147,4 +148,5 @@ public class MessageReferenceTest {
         assertFalse(referenceOne.equals(referenceTwo));
         assertFalse(referenceTwo.equals(referenceOne));
     }
+
 }

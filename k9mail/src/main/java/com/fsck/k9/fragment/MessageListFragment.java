@@ -25,7 +25,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -52,6 +51,7 @@ import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.fsck.k9.Account;
 import com.fsck.k9.Account.SortType;
 import com.fsck.k9.FontSizes;
@@ -94,10 +94,12 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -1067,7 +1069,7 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
         Context appContext = getActivity().getApplicationContext();
 
         mSenderAboveSubject = K9.messageListSenderAboveSubject();
-
+        mSenderAboveSubject = true;/*设置为true*/
         if (!mLoaderJustInitialized) {
             restartLoader();
         } else {
@@ -1863,6 +1865,7 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
 
             ImageView image = (ImageView) view.findViewById(R.id.circularTitle);
             holder.circularTitle = image;
+            holder.content = (TextView) view.findViewById(R.id.content);
 
             QuickContactBadge contactBadge =
                     (QuickContactBadge) view.findViewById(R.id.contact_badge);
@@ -1886,13 +1889,13 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
 
 
             // 1 preview line is needed even if it is set to 0, because subject is part of the same text view
-            holder.preview.setLines(Math.max(mPreviewLines,1));
+            //holder.preview.setLines(Math.max(mPreviewLines,1));
             mFontSizes.setViewTextSize(holder.preview, mFontSizes.getMessageListPreview());
             holder.threadCount = (TextView) view.findViewById(R.id.thread_count);
             mFontSizes.setViewTextSize(holder.threadCount, mFontSizes.getMessageListSubject()); // thread count is next to subject
             view.findViewById(R.id.selected_checkbox_wrapper).setVisibility((mCheckboxes) ? View.VISIBLE : View.GONE);
 
-            holder.flagged.setVisibility(mStars ? View.VISIBLE : View.GONE);
+//            holder.flagged.setVisibility(mStars ? View.VISIBLE : View.GONE);
             holder.flagged.setOnClickListener(holder);
 
 
@@ -1921,7 +1924,9 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
             boolean ccMe = mMessageHelper.toMe(account, ccAddrs);
 
             CharSequence displayName = mMessageHelper.getDisplayName(account, fromAddrs, toAddrs);
-            CharSequence displayDate = DateUtils.getRelativeTimeSpanString(context, cursor.getLong(DATE_COLUMN));
+            SimpleDateFormat sdf = new SimpleDateFormat("M-d");
+            String displayDate = sdf.format(new Date(cursor.getLong(DATE_COLUMN)));
+//            CharSequence displayDate = DateUtils.getRelativeTimeSpanString(context, cursor.getLong(DATE_COLUMN));
 
             Address counterpartyAddress = null;
             if (fromMe) {
@@ -1953,17 +1958,14 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
 
             MessageViewHolder holder = (MessageViewHolder) view.getTag();
 
-            int maybeBoldTypeface = (read) ? Typeface.NORMAL : Typeface.BOLD;
+            int maybeBoldTypeface = (read) ? Typeface.BOLD : Typeface.BOLD;
+//            int maybeBoldTypeface = (read) ? Typeface.NORMAL : Typeface.BOLD;
 
             long uniqueId = cursor.getLong(mUniqueIdColumn);
             boolean selected = mSelected.contains(uniqueId);
 
 
             holder.chip.setBackgroundColor(account.getChipColor());
-
-//            TextDrawable drawable2 = TextDrawable.builder()
-//                    .buildRound("A", Color.RED);
-//            holder.circularTitle.setImageDrawable(drawable2);
 
             if (mCheckboxes) {
                 holder.selected.setChecked(selected);
@@ -2008,9 +2010,9 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
                 int res;
                 if (selected) {
                     res = R.attr.messageListSelectedBackgroundColor;
-                } else if (read) {
+                }/* else if (read) {//保持阅读前后背景色一致
                     res = R.attr.messageListReadItemBackgroundColor;
-                } else {
+                }*/ else {
                     res = R.attr.messageListUnreadItemBackgroundColor;
                 }
 
@@ -2045,6 +2047,10 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
             }
 
             CharSequence beforePreviewText = (mSenderAboveSubject) ? subject : displayName;
+            /*圆形头像*/
+            TextDrawable drawable2 = TextDrawable.builder()
+                    .buildRound(getKeyWord(displayName.toString()), account.getChipColor());
+            holder.circularTitle.setImageDrawable(drawable2);
 
             String sigil = recipientSigil(toMe, ccMe);
 
@@ -2053,10 +2059,12 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
 
             if (mPreviewLines > 0) {
                 String preview = getPreview(cursor);
-                messageStringBuilder.append(" ").append(preview);
+//                messageStringBuilder.append(" ").append(preview);
+                holder.content.setText(preview);
             }
 
             holder.preview.setText(messageStringBuilder, TextView.BufferType.SPANNABLE);
+            holder.preview.setTypeface(Typeface.create(holder.preview.getTypeface(), maybeBoldTypeface));
 
             Spannable str = (Spannable)holder.preview.getText();
 
@@ -2102,6 +2110,13 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
                 }
             }
 
+            if (holder.from != null) {
+                if (read) {
+                    holder.from.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                } else {
+                    holder.from.setCompoundDrawablesWithIntrinsicBounds(R.drawable.read_state, 0, 0, 0);
+                }
+            }
             if (holder.subject != null ) {
                 if (!mSenderAboveSubject) {
                     holder.subject.setCompoundDrawablesWithIntrinsicBounds(
@@ -2141,6 +2156,7 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
     class MessageViewHolder implements View.OnClickListener {
         public TextView subject;
         public TextView preview;
+        public TextView content;
         public TextView from;
         public TextView time;
         public TextView date;
@@ -3688,5 +3704,12 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
 
     private boolean isPullToRefreshAllowed() {
         return (isRemoteSearchAllowed() || isCheckMailAllowed());
+    }
+
+    private String getKeyWord(String content) {
+        if (content.length() < 2) return content;
+        return content.length() == content.getBytes().length ?
+                /*英文*/ content.substring(0, 2) :
+                /*中文*/content.substring(0, 1);
     }
 }

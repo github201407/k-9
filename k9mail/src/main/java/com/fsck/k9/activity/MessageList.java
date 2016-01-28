@@ -551,19 +551,21 @@ public class MessageList extends K9Activity implements MessageListFragmentListen
 
         mActionBar.setDisplayHomeAsUpEnabled(false);
         mActionBar.setDisplayShowHomeEnabled(false);
-
+        /*UI左侧菜单*/
         customView.findViewById(R.id.menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MessageList.this, "menu", Toast.LENGTH_SHORT).show();
             }
         });
+        /*UI搜索邮件*/
         customView.findViewById(R.id.search_mail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MessageList.this, "search_mail", Toast.LENGTH_SHORT).show();
             }
         });
+        /*UI写邮件*/
         customView.findViewById(R.id.new_mail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

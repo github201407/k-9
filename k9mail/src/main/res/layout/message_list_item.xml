@@ -76,6 +76,24 @@
         android:paddingTop="5dip">
 
         <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_below="@+id/preview"
+            android:layout_marginLeft="1dip"
+            android:layout_marginRight="3dip"
+            android:layout_toLeftOf="@+id/flagged_bottom_right"
+            android:bufferType="spannable"
+            android:gravity="top"
+            android:longClickable="false"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?android:attr/textColorPrimary" />
+
+        <TextView
             android:id="@+id/preview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,7 +107,8 @@
             android:bufferType="spannable"
             android:gravity="top"
             android:longClickable="false"
-            android:singleLine="false"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?android:attr/textColorPrimary" />
 
@@ -123,7 +142,7 @@
                 android:layout_marginBottom="1dip"
                 android:layout_marginLeft="1dip"
                 android:layout_weight="0.7"
-                android:ellipsize="marquee"
+                android:ellipsize="end"
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="?android:attr/textColorPrimary" />
@@ -181,7 +200,7 @@
             android:paddingLeft="2dip"
             android:paddingRight="4dip"
             android:paddingTop="5dip"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
 
     </RelativeLayout>
