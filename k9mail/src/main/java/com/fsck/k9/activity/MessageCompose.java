@@ -1,6 +1,19 @@
 package com.fsck.k9.activity;
 
 
+import com.fsck.k9.R;
+
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -92,24 +105,12 @@ import com.fsck.k9.message.SimpleMessageBuilder;
 import com.fsck.k9.message.SimpleMessageFormat;
 import com.fsck.k9.ui.EolConvertingEditText;
 import com.fsck.k9.view.MessageWebView;
-
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.SimpleHtmlSerializer;
 import org.htmlcleaner.TagNode;
 import org.openintents.openpgp.util.OpenPgpApi;
 import org.openintents.openpgp.util.OpenPgpServiceConnection;
-
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @SuppressWarnings("deprecation")
 public class MessageCompose extends K9Activity implements OnClickListener,
@@ -168,8 +169,8 @@ public class MessageCompose extends K9Activity implements OnClickListener,
 
     private static final int ACTIVITY_REQUEST_PICK_ATTACHMENT = 1;
 
-    private static final int REQUEST_MASK_RECIPIENT_PRESENTER = (1 << 8);
-    private static final int REQUEST_MASK_MESSAGE_BUILDER = (2 << 8);
+    private static final int REQUEST_MASK_RECIPIENT_PRESENTER = (1<<8);
+    private static final int REQUEST_MASK_MESSAGE_BUILDER = (2<<8);
 
     /**
      * Regular expression to remove the first localized "Re:" prefix in subjects.

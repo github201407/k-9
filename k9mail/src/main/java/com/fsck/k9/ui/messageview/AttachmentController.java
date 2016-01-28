@@ -1,6 +1,5 @@
 package com.fsck.k9.ui.messageview;
 
-
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;

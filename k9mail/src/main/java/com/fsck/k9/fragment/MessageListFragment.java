@@ -46,6 +46,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
@@ -1860,6 +1861,9 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
 
             }
 
+            ImageView image = (ImageView) view.findViewById(R.id.circularTitle);
+            holder.circularTitle = image;
+
             QuickContactBadge contactBadge =
                     (QuickContactBadge) view.findViewById(R.id.contact_badge);
             if (mContactsPictureLoader != null) {
@@ -1956,6 +1960,10 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
 
 
             holder.chip.setBackgroundColor(account.getChipColor());
+
+//            TextDrawable drawable2 = TextDrawable.builder()
+//                    .buildRound("A", Color.RED);
+//            holder.circularTitle.setImageDrawable(drawable2);
 
             if (mCheckboxes) {
                 holder.selected.setChecked(selected);
@@ -2142,6 +2150,7 @@ public class MessageListFragment extends Fragment implements OnItemClickListener
         public CheckBox selected;
         public int position = -1;
         public QuickContactBadge contactBadge;
+        public ImageView circularTitle;
         @Override
         public void onClick(View view) {
             if (position != -1) {

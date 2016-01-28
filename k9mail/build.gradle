@@ -6,6 +6,9 @@ apply plugin: 'jacoco'
 
 repositories {
     jcenter()
+    maven {
+        url 'http://dl.bintray.com/amulyakhare/maven'
+    }
 }
 
 ext {
@@ -30,17 +33,17 @@ dependencies {
     compile 'de.cketti.library.changelog:ckchangelog:1.2.1'
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'com.splitwise:tokenautocomplete:2.0.2'
-
+    compile 'com.github.pavlospt:roundedletterview:1.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
-
     testCompile 'org.robolectric:robolectric:3.0'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
+    compileSdkVersion 23
+    buildToolsVersion '23.0.2'
 
     defaultConfig {
         applicationId "com.fsck.k9"

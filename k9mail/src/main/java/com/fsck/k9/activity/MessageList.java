@@ -12,7 +12,10 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -188,6 +191,11 @@ public class MessageList extends K9Activity implements MessageListFragmentListen
     private boolean mMessageListWasDisplayed = false;
     private ViewSwitcher mViewSwitcher;
 
+
+    @Override
+    public boolean onCreatePanelMenu(int featureId, Menu menu) {
+        return super.onCreatePanelMenu(featureId, menu);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -476,7 +484,7 @@ public class MessageList extends K9Activity implements MessageListFragmentListen
         }
 
         // now we know if we are in single account mode and need a subtitle
-        mActionBarSubTitle.setVisibility((!mSingleFolderMode) ? View.GONE : View.VISIBLE);
+//        mActionBarSubTitle.setVisibility((!mSingleFolderMode) ? View.GONE : View.VISIBLE);
 
         return true;
     }
@@ -518,6 +526,12 @@ public class MessageList extends K9Activity implements MessageListFragmentListen
         mMessageListWasDisplayed = savedInstanceState.getBoolean(STATE_MESSAGE_LIST_WAS_DISPLAYED);
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        return super.onCreateView(name, context, attrs);
+    }
+
     private void initializeActionBar() {
         mActionBar = getActionBar();
 
@@ -535,7 +549,33 @@ public class MessageList extends K9Activity implements MessageListFragmentListen
         mActionButtonIndeterminateProgress =
                 getLayoutInflater().inflate(R.layout.actionbar_indeterminate_progress_actionview, null);
 
-        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(false);
+        mActionBar.setDisplayShowHomeEnabled(false);
+
+        customView.findViewById(R.id.menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MessageList.this, "menu", Toast.LENGTH_SHORT).show();
+            }
+        });
+        customView.findViewById(R.id.search_mail).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MessageList.this, "search_mail", Toast.LENGTH_SHORT).show();
+            }
+        });
+        customView.findViewById(R.id.new_mail).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MessageList.this, "new_mail", Toast.LENGTH_SHORT).show();
+                MessageCompose.actionCompose(MessageList.this, null);
+            }
+        });
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
     }
 
     @Override
@@ -1385,7 +1425,7 @@ public class MessageList extends K9Activity implements MessageListFragmentListen
             if (mMenuButtonCheckMail != null)
                 mMenuButtonCheckMail.setActionView(null);
             if (enable) {
-                mActionBarProgress.setVisibility(ProgressBar.VISIBLE);
+                mActionBarProgress.setVisibility(ProgressBar.GONE);
             } else {
                 mActionBarProgress.setVisibility(ProgressBar.GONE);
             }

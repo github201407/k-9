@@ -44,7 +44,8 @@ K-9改进的功能包括：
 </p>
     ]]></string>
   <!--Default signature-->
-  <string name="default_signature">-- \n使用 K-9 Mail 发送自我的Android设备。</string>
+  <!--<string name="default_signature">&#45;&#45; \n使用 K-9 Mail 发送自我的Android设备。</string>-->
+  <string name="default_signature">发至政务平台</string>
   <!--General strings that include the app name-->
   <string name="account_delete_dlg_instructions_fmt">账户“<xliff:g id="account">%s</xliff:g>”将从K-9 Mail中删除。</string>
   <string name="account_recreate_dlg_instructions_fmt">账户“<xliff:g id="account">%s</xliff:g>”的全部数据将从K-9 Mail中删除，但是账户设置将保留。</string>
