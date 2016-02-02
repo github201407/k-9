@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
@@ -55,6 +56,7 @@ import com.fsck.k9.view.MessageTitleView;
 import com.fsck.k9.view.ViewSwitcher;
 import com.fsck.k9.view.ViewSwitcher.OnSwitchCompleteListener;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
 
@@ -200,6 +202,7 @@ public class MessageList extends K9Activity implements MessageListFragmentListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setOverflowShowingAlways();
 
         if (UpgradeDatabases.actionUpgradeDatabases(this, getIntent())) {
             finish();
@@ -415,7 +418,7 @@ public class MessageList extends K9Activity implements MessageListFragmentListen
                 mSearch.or(new SearchCondition(SearchField.SUBJECT, Attribute.CONTAINS, query));
                 // TODO re-enable search in message contents
                 // mSearch.or(new SearchCondition(SearchField.MESSAGE_CONTENTS, Attribute.CONTAINS, query));
-                Toast.makeText(this, R.string.warn_search_disabled, Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, R.string.warn_search_disabled, Toast.LENGTH_LONG).show();
 
                 Bundle appData = intent.getBundleExtra(SearchManager.APP_DATA);
                 if (appData != null) {
@@ -534,10 +537,10 @@ public class MessageList extends K9Activity implements MessageListFragmentListen
 
     private void initializeActionBar() {
         mActionBar = getActionBar();
-
+        if(mActionBar == null) return;
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.setCustomView(R.layout.actionbar_custom);
-
+        mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_CUSTOM);
         View customView = mActionBar.getCustomView();
         mActionBarMessageList = customView.findViewById(R.id.actionbar_message_list);
         mActionBarMessageView = customView.findViewById(R.id.actionbar_message_view);
@@ -551,28 +554,54 @@ public class MessageList extends K9Activity implements MessageListFragmentListen
 
         mActionBar.setDisplayHomeAsUpEnabled(false);
         mActionBar.setDisplayShowHomeEnabled(false);
+        /*邮件列表MessageListFragment*/
         /*UI左侧菜单*/
         customView.findViewById(R.id.menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MessageList.this, "menu", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MessageList.this, "menu", Toast.LENGTH_SHORT).show();
+                goBack();
             }
         });
         /*UI搜索邮件*/
         customView.findViewById(R.id.search_mail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MessageList.this, "search_mail", Toast.LENGTH_SHORT).show();
+                mMessageListFragment.onSearchRequested();
             }
         });
         /*UI写邮件*/
         customView.findViewById(R.id.new_mail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MessageList.this, "new_mail", Toast.LENGTH_SHORT).show();
-                MessageCompose.actionCompose(MessageList.this, null);
+                mMessageListFragment.onCompose();
             }
         });
+
+        /*阅读邮件MessageViewFragment*/
+        /*UI返回*/
+        customView.findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MessageList.this, "back", Toast.LENGTH_SHORT).show();
+                goBack();
+            }
+        });
+        /*UI上一封*/
+        customView.findViewById(R.id.before).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPreviousMessage();
+            }
+        });
+        /*UI下一封*/
+        customView.findViewById(R.id.after).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showNextMessage();
+            }
+        });
+
     }
 
     @Override
@@ -1607,6 +1636,21 @@ public class MessageList extends K9Activity implements MessageListFragmentListen
 
         if (mMessageViewFragment != null) {
             mMessageViewFragment.handleCryptoResult(requestCode, resultCode, data);
+        }
+    }
+
+    /*隐藏ActionBar overflow button*/
+    private void setOverflowShowingAlways() {
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Log.e("K9mail", " " + config.hasPermanentMenuKey());
+            if(config.hasPermanentMenuKey()) return;
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            menuKeyField.setAccessible(true);
+            menuKeyField.setBoolean(config, true);
+            Log.e("K9mail", " " + config.hasPermanentMenuKey());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

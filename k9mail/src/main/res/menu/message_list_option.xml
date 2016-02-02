@@ -15,7 +15,7 @@
         android:id="@+id/previous_message"
         android:title="@string/previous_action"
         android:icon="?attr/iconActionPreviousMessage"
-        android:showAsAction="always"
+        android:showAsAction="never"
     />
 
     <!-- MessageView -->
@@ -23,7 +23,7 @@
         android:id="@+id/next_message"
         android:title="@string/next_action"
         android:icon="?attr/iconActionNextMessage"
-        android:showAsAction="always"
+        android:showAsAction="never"
     />
 
     <!-- MessageList -->
@@ -54,38 +54,38 @@
         android:id="@+id/delete"
         android:alphabeticShortcut="q"
         android:icon="?attr/iconActionDelete"
-        android:showAsAction="always"
+        android:showAsAction="never"
         android:title="@string/delete_action"/>
     <!-- MessageView -->
     <item
         android:id="@+id/archive"
         android:icon="?attr/iconActionArchive"
-        android:showAsAction="ifRoom"
+        android:showAsAction="never"
         android:title="@string/archive_action"/>
     <!-- MessageView -->
     <item
         android:id="@+id/spam"
         android:icon="?attr/iconActionSpam"
-        android:showAsAction="ifRoom"
+        android:showAsAction="never"
         android:title="@string/spam_action"/>
     <!-- MessageView -->
     <item
         android:id="@+id/move"
         android:icon="?attr/iconActionMove"
-        android:showAsAction="ifRoom"
+        android:showAsAction="never"
         android:title="@string/move_action"/>
     <!-- MessageView -->
     <item
         android:id="@+id/copy"
         android:icon="?attr/iconActionCopy"
-        android:showAsAction="ifRoom"
+        android:showAsAction="never"
         android:title="@string/copy_action"/>
 
     <!-- MessageView -->
     <item
         android:id="@+id/single_message_options"
         android:icon="?attr/iconActionSingleMessageOptions"
-        android:showAsAction="ifRoom"
+        android:showAsAction="never"
         android:title="@string/single_message_options_action">
         <menu>
             <item

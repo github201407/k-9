@@ -1181,5 +1181,5 @@ Please submit bug reports, contribute new features and ask questions at
     <string name="attachment_icon">attachment_icon</string>
     <string name="attachment_not_download">DownLoad Attachment</string>
     <string name="attachment_loading">DownLoading…</string>
-    <string name="message_view_date_label">Date：</string>
+    <string name="message_view_date_label">Date:</string>
 </resources>

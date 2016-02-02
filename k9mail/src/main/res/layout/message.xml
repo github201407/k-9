@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.fsck.k9.ui.messageview.MessageTopView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.fsck.k9.ui.messageview.MessageTopView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/message_view"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_weight="1"
-    android:background="?attr/messageViewBackgroundColor">
+    android:background="?attr/messageViewBackgroundColor"
+    android:orientation="vertical">
 
     <com.fsck.k9.view.NonLockingScrollView
         android:layout_width="fill_parent"
@@ -15,12 +14,12 @@
         android:layout_weight="1">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="fill_parent"
-	        android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
-	        <!-- Header area -->
-	        <include layout="@layout/message_view_header"/>
+            <!-- Header area -->
+            <include layout="@layout/message_view_header" />
 
             <Button
                 android:id="@+id/show_pictures"
@@ -34,26 +33,71 @@
                 android:layout_marginTop="4dip"
                 android:text="@string/message_view_show_pictures_action"
                 android:visibility="gone"
-                tools:visibility="visible"/>
+                tools:visibility="visible" />
 
             <LinearLayout
-                android:orientation="vertical"
                 android:id="@+id/message_containers"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
-	    </LinearLayout>
+        </LinearLayout>
 
     </com.fsck.k9.view.NonLockingScrollView>
 
-    <Button android:id="@+id/download_remainder"
-        android:text="@string/attachment_not_download"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_email_attachment_small"
-        android:visibility="gone"
-        android:background="@drawable/attachment_view_button"
+    <Button
+        android:id="@+id/download_remainder"
         android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/attachment_view_button"
+        android:drawableLeft="@drawable/ic_email_attachment_small"
         android:paddingLeft="10dp"
-        android:layout_margin="4dp"/>
+        android:text="@string/attachment_not_download"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <TextView
+            android:id="@+id/star"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/message_view_star_selector"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="收藏"
+            android:textColor="#000"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/reback"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/message_view_reback_selector"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="回复/转发"
+            android:textColor="#000"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/del"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/message_view_del_selector"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="删除"
+            android:textColor="#000"
+            android:textSize="12sp" />
+    </LinearLayout>
 
 </com.fsck.k9.ui.messageview.MessageTopView>

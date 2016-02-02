@@ -167,6 +167,25 @@ public class MessageViewFragment extends Fragment implements ConfirmationDialogF
 
         mFragmentListener.messageHeaderViewAvailable(mMessageView.getMessageHeaderView());
 
+        view.findViewById(R.id.star).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onToggleFlagged();
+            }
+        });
+        view.findViewById(R.id.reback).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onForward();
+            }
+        });
+        view.findViewById(R.id.del).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDelete();
+            }
+        });
+
         return view;
     }
 

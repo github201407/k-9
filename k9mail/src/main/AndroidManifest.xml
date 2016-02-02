@@ -205,7 +205,7 @@
             android:name=".activity.MessageList"
             android:configChanges="locale"
             android:launchMode="singleTop"
-            android:uiOptions="splitActionBarWhenNarrow">
+            android:uiOptions="splitActionBarWhenNarrow"> <!-- -->
             <intent-filter>
                 <!-- This action is only to allow an entry point for launcher shortcuts -->
                 <action android:name="android.intent.action.MAIN"/>
@@ -252,8 +252,7 @@
         <activity
             android:name=".activity.Search"
             android:configChanges="locale"
-            android:label="@string/search_action"
-            android:uiOptions="splitActionBarWhenNarrow">
+            android:label="@string/search_action"><!-- android:uiOptions="splitActionBarWhenNarrow"-->
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
                 <category android:name="android.intent.category.DEFAULT"/>

@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -102,14 +103,48 @@
         android:id="@+id/actionbar_message_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:visibility="gone">
+
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/back"
+            android:text="收件箱"/>
 
         <com.fsck.k9.view.MessageTitleView
             android:id="@+id/message_title_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/before"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right|center_vertical"
+            android:padding="10dp"
+            android:src="@drawable/before" />
+
+        <ImageView
+            android:id="@+id/after"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right|center_vertical"
+            android:padding="10dp"
+            android:src="@drawable/after" />
     </LinearLayout>
 
 </FrameLayout>

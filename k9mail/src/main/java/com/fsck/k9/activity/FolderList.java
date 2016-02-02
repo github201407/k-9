@@ -303,7 +303,9 @@ public class FolderList extends K9ListActivity {
         mActionBarSubTitle = (TextView) customView.findViewById(R.id.actionbar_title_sub);
         mActionBarUnread = (TextView) customView.findViewById(R.id.actionbar_unread_count);
 
-        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_CUSTOM);
+        mActionBar.setDisplayHomeAsUpEnabled(false);
+        mActionBar.setDisplayShowHomeEnabled(false);
     }
 
     @Override
