@@ -1,6 +1,8 @@
 package com.fsck.k9.ui.messageview;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.DownloadManager;
 import android.app.Fragment;
@@ -9,6 +11,7 @@ import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.Loader;
@@ -20,9 +23,13 @@ import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.fsck.k9.Account;
@@ -176,7 +183,7 @@ public class MessageViewFragment extends Fragment implements ConfirmationDialogF
         view.findViewById(R.id.reback).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                onForward();
+               showPopMenu(v);
             }
         });
         view.findViewById(R.id.del).setOnClickListener(new OnClickListener() {
@@ -187,6 +194,62 @@ public class MessageViewFragment extends Fragment implements ConfirmationDialogF
         });
 
         return view;
+    }
+
+    private void showPopMenu(View view){
+        PopupMenu popup = new PopupMenu(getActivity(), view);
+        //Inflating the Popup using xml file
+        popup.getMenuInflater()
+                .inflate(R.menu.message_view_reback_forward_menu, popup.getMenu());
+        //registering popup with OnMenuItemClickListener
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menu_reply:
+                        onReply();
+                        break;
+                    case R.id.menu_forward:
+                        onForward();
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
+        popup.show();
+    }
+
+    Dialog dialog;
+    private Dialog showMenu(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setItems(new String[]{"回复", "转发"}, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case 0:
+                                onReply();
+                                break;
+                            case 1:
+                                onForward();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+        return builder.create();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(dialog != null && dialog.isShowing())
+            dialog.dismiss();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
